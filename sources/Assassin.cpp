@@ -27,7 +27,7 @@ namespace coup{
             pl.alive = false;
             this->game->last_player_coup = pl.name;
             this->game->removeplayer(pl);
-            seven = false;
+            const bool seven = false;
             this->last_action = "coup";
             this->game->last_coup = &pl;
             this->game->start_game = true;

@@ -12,14 +12,16 @@ namespace coup{
         if(play.last_action != "foreign aid"){
             throw runtime_error("can't block action that isn't foreign aid");
         }
-        if(this->salary >= 10){
+        const int ten_coins =10;
+        if(this->salary >= ten_coins){
             throw runtime_error("must make coup..");
         }
         play.setcoin(2);
         this->last_action = "block";
     }
     void Duke::tax(){
-        if(this->salary >= 10){
+        const int ten_coins =10;
+        if(this->salary >= ten_coins){
             throw runtime_error("must make coup..");
         }
         this->salary = this->salary +3;

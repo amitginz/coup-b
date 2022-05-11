@@ -19,24 +19,34 @@ namespace coup{
         if(pl.last_action != "steal"){
             throw runtime_error("captain can block only steal");
         }
-        pl.setcoin(-2);
+        pl.setcoin(2);
+        this->game->last_coup->setcoin(-2);
         this->last_action = "block";
     }
     void Captain::steal(Player &pl){
         if(!(this->name == this->game->turn())){
             throw runtime_error("player not playing in his turn...");
         }
-        if(pl.alive == 0){
+        if(!pl.alive){
             throw runtime_error("player is not alive...");
         }
-        if(this->salary >= 10){
+        const int ten_coins = 10;
+        if(this->salary >= ten_coins){
             throw runtime_error("must make coup..");
         }
+
         if(pl.salary>0){
-            this->salary = this->salary +pl.salary;
-            if(pl.salary<=2 && pl.salary>0){
-                pl.setcoin(pl.salary);
+            bool enter = true;
+            if(pl.salary>=2){
+                pl.setcoin(2);
+                this->salary = this->salary +2;
+                enter = false;
             }
+            if(pl.salary>=1 && enter){
+                pl.setcoin(1);
+                this->salary = this->salary +1;
+            }
+             this->game->last_coup = &pl;
              this->game->setturn();
              this->last_action = "steal";
              this->game->start_game = true;

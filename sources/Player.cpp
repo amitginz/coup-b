@@ -11,7 +11,8 @@ namespace coup{
         game = &_game;
         game->addplayers(this);
         game->setplayes(name);
-        if(this->game->get_players().size()>6){
+        const int max_players = 6;
+        if(this->game->get_players().size()>max_players){
             throw runtime_error("there is too many players...");
         }
         if(this->game->start_game){
@@ -25,10 +26,12 @@ namespace coup{
         if(this->game->get_players().size()<2){
             throw runtime_error("there is too little players...");
         }
-        if(this->salary >= 10){
+        const int ten_coins = 10;
+        if(this->salary >= ten_coins){
             throw runtime_error("must make coup...");
         }
         if(this->name == this->game->turn()){
+            // cout<<this->game->turn()<<endl;
             this->salary++;
             this->game->setturn();
             this->game->start_game = true;
@@ -42,7 +45,8 @@ namespace coup{
         if(this->game->get_players().size()<2){
             throw runtime_error("there is too little players...");
         }
-        if(this->salary >= 10){
+        const int ten_coins = 10;
+        if(this->salary >= ten_coins){
             throw runtime_error("must make coup...");
         }
         if(this->name != this->game->turn()){
@@ -54,14 +58,12 @@ namespace coup{
             this->game->start_game = true;
             this->last_action = "foreign aid";
         }
-        // else{
-            
-        // }
+
     }
     void Player::coup(Player &pl){
         
         const int bound = 7;
-        if(this->salary >= bound && pl.alive == true){
+        if(this->salary >= bound && pl.alive){
             this->game->setturn();
             this->salary = this->salary-bound;
             pl.alive = false;
@@ -76,7 +78,7 @@ namespace coup{
             throw runtime_error("don't have enough money");
         }
     }
-    int Player::coins(){
+    int Player::coins()const{
         int income = this->salary;
         return income;}
         

@@ -23,26 +23,20 @@ string Game::turn(){
 
 void Game::setturn(){
     this->to_play = (((unsigned int)this->to_play+1) % (this->get_players().size()));
-    // if(this->to_play == this->Players.size()-1){
-    //     this->to_play = 0;
-    // }
-    // else{
-    //     this->to_play++;
-    // }
+    const int start = 0;
+    if(this->to_play == start){
+        bool end_turn = true;
+    }
+    else{
+        bool end_turn = false;
+    }
     if(!(this->Players.at((unsigned)this->to_play)->alive)){
         this->setturn();
     }
 }
 
-vector<string> Game::players(){
-    // vector<string> player_name;
-    // for(Player *p: Players){
-    //     if(p->alive){
-    //         play.push_back(p->name);
-    //     }
-    // }
+vector<string> Game::players()const{
     return this->play;
-    // return player_name;
 }
 string Game::winner(){
     if(!start_game){
@@ -57,6 +51,7 @@ string Game::winner(){
 
 void Game::addplayers(Player *player){
    Players.push_back(player);
+   Players_begin.push_back(player);
 }
 
 void Game::setplayes(const string& name){
@@ -64,17 +59,12 @@ void Game::setplayes(const string& name){
 }
 
 void Game::removeplayer(Player& player){
-    vector<string> players;
-    vector<Player*> Play;
     for(uint i =0 ;i < get_players().size();i++){
         if(!this->Players.at(i)->alive){
-            // players.push_back(this->play.at(i));
-            // Play.push_back(this->Players.at(i));
+            this->place_coup = (int)i;
             this->Players.erase(Players.begin()+i);
             this->play.erase(play.begin()+i);
         }
-        // this->play = players;
-        // this->Players = Play;
     }
 }
 void Game::addname(const string& name){
@@ -85,7 +75,18 @@ void Game::addname(const string& name){
     }
     this->play = players;
 }
-vector<Player*> Game::get_players(){
+
+void Game::add_player(Player*player,int num){
+    vector<Player*> players;
+    for(uint i = 0 ; i<this->Players.size()+1;i++){
+        if(this->Players_begin.at(i)->alive){
+            players.push_back(Players_begin.at(i));
+        }
+    }
+    this->Players = players;
+    
+}
+vector<Player*> Game::get_players()const{
     return this->Players;
 }
 

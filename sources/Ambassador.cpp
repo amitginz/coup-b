@@ -21,7 +21,8 @@ namespace coup{
         if(!player1.alive || !player2.alive){
             throw runtime_error("player isn't alive");
         }
-        if(this->salary >= 10){
+        const int ten_coins = 10;
+        if(this->salary >= ten_coins){
             throw runtime_error("must make coup..");
         }
             this->game->setturn();
@@ -38,7 +39,8 @@ namespace coup{
             throw runtime_error("the player wasn't steal");
         }
         this->last_action = "block";
-        pl.setcoin(-2);
+        pl.setcoin(2);
+        this->game->last_coup->setcoin(-2);
     }
     string Ambassador::role(){
         return this->role_pl;

@@ -18,7 +18,7 @@ public:
     void income();
     void foreign_aid();
     virtual void coup(Player &pl);
-    int coins();
+    int coins() const;
     void setcoin(int num);
     virtual string role();
 };

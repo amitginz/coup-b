@@ -14,22 +14,26 @@ private:
     
 public:
     bool start_game = false;
+    int place_coup =0;
+    bool end_turn = false;
     string last_player_coup;
     Player* last_coup;
     vector<string> play;
     vector<Player*> Players;
+    vector<Player*> Players_begin;
     unsigned int to_play =0;
     Game(/* args */);
     ~Game();
     string turn();
     void setturn();
-    vector<string> players();
+    vector<string> players()const;
     void addplayers(Player *player);
     string winner();
-    vector<Player*> get_players();
+    vector<Player*> get_players()const;
     void setplayes(const string& name);
     void removeplayer(Player& player);
     void addname(const string& name);
+    void add_player(Player*,int);
     };
 }
 
