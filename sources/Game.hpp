@@ -15,6 +15,7 @@ private:
 public:
     bool start_game = false;
     int place_coup =0;
+    bool add_player_sign = false;
     bool end_turn = false;
     bool regular_coup = false;
     string last_player_coup;

@@ -17,11 +17,7 @@ namespace coup{
         if(!pl.alive){
             throw runtime_error("player is not alive...");
         }
-        if(this->game->turn() != this->name){
-            throw runtime_error("it is not player turn");
-        }
         if(this->salary >= bound){
-            this->game->setturn();
             this->salary = this->salary-bound;
             pl.alive = false;
             this->game->last_player_coup = pl.name;
@@ -31,9 +27,9 @@ namespace coup{
             this->game->last_coup = &pl;
             this->game->regular_coup = true;
             this->game->start_game = true;
+            this->game->setturn();
         }
         else if(this->salary >= bound1 && seven){
-            this->game->setturn();
             this->salary = this->salary-bound1;
             pl.alive = false;
             this->game->last_player_coup = pl.name;
@@ -42,6 +38,7 @@ namespace coup{
             this->game->removeplayer(pl);
             this->last_action = "coup";
             this->game->start_game = true;
+            this->game->setturn();
         }
         else{
             throw runtime_error("don't have enough money or player is not alive...");

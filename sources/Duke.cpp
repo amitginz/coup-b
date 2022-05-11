@@ -13,8 +13,8 @@ namespace coup{
             throw runtime_error("can't block action that isn't foreign aid");
         }
         const int ten_coins =10;
-        if(this->salary >= ten_coins){
-            throw runtime_error("must make coup..");
+        if(!play.alive ||!this->alive){
+            throw runtime_error("this player not alive");
         }
         play.setcoin(2);
         this->last_action = "block";
@@ -25,8 +25,8 @@ namespace coup{
             throw runtime_error("must make coup..");
         }
         this->salary = this->salary +3;
-        this->game->setturn();
         this->game->start_game = true;
+        this->game->setturn();
     }
     string Duke::role(){
         return this->role_pl;

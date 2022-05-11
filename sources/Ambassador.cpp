@@ -25,11 +25,11 @@ namespace coup{
         if(this->salary >= ten_coins){
             throw runtime_error("must make coup..");
         }
-            this->game->setturn();
             player1.salary--;
             player2.salary++;
             this->last_action = "transfer";
             this->game->start_game = true;
+            this->game->setturn();
     }
     void Ambassador::block(Player &pl){
         if(!pl.alive){

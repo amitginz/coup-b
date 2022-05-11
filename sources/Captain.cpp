@@ -47,9 +47,9 @@ namespace coup{
                 this->salary = this->salary +1;
             }
              this->game->last_coup = &pl;
-             this->game->setturn();
              this->last_action = "steal";
              this->game->start_game = true;
+             this->game->setturn();
         }
         else{ 
             throw runtime_error("player doesn't have enough money");

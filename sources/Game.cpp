@@ -17,20 +17,16 @@ string Game::turn(){
     if(this->Players.empty()){
         throw runtime_error("we don't have players in the game");
     }
-    string turn = Players.at((unsigned int)this->to_play)->name;
+    string turn = Players_begin.at((unsigned int)this->to_play)->name;
     return turn;
 }
 
 void Game::setturn(){
-    this->to_play = (((unsigned int)this->to_play+1) % (this->get_players().size()));
-    const int start = 0;
-    if(this->to_play == start){
-        bool end_turn = true;
-    }
-    else{
-        bool end_turn = false;
-    }
-    if(!(this->Players.at((unsigned)this->to_play)->alive)){
+    this->to_play = (((unsigned int)this->to_play+1) % (this->Players_begin.size()));
+    // if (this->add_player_sign){
+    //     this->add_player_sign = false;
+    // }
+    if(!(this->Players_begin.at((unsigned)this->to_play)->alive)){
         this->setturn();
     }
 }
@@ -77,15 +73,14 @@ void Game::addname(const string& name){
 }
 
 void Game::add_player(Player*player,int num){
-    // vector<Player*> players;
-    // for(uint i = 0 ; i<this->Players.size()+1;i++){
-    //     if(this->Players_begin.at(i)->alive){
-    //         players.push_back(Players_begin.at(i));
-    //     }
-    // }
-    // this->Players = players;
-    this->Players.insert(this->Players.begin()+num,player);
-    
+    vector<Player*> players;
+    for(uint i = 0 ; i<this->Players.size()+1;i++){
+        if(this->Players_begin.at(i)->alive){
+            players.push_back(Players_begin.at(i));
+        }
+    }
+    this->Players = players;
+    this->add_player_sign = true;
 }
 vector<Player*> Game::get_players()const{
     return this->Players;
