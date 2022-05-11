@@ -16,6 +16,7 @@ public:
     bool start_game = false;
     int place_coup =0;
     bool end_turn = false;
+    bool regular_coup = false;
     string last_player_coup;
     Player* last_coup;
     vector<string> play;

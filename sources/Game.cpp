@@ -77,13 +77,14 @@ void Game::addname(const string& name){
 }
 
 void Game::add_player(Player*player,int num){
-    vector<Player*> players;
-    for(uint i = 0 ; i<this->Players.size()+1;i++){
-        if(this->Players_begin.at(i)->alive){
-            players.push_back(Players_begin.at(i));
-        }
-    }
-    this->Players = players;
+    // vector<Player*> players;
+    // for(uint i = 0 ; i<this->Players.size()+1;i++){
+    //     if(this->Players_begin.at(i)->alive){
+    //         players.push_back(Players_begin.at(i));
+    //     }
+    // }
+    // this->Players = players;
+    this->Players.insert(this->Players.begin()+num,player);
     
 }
 vector<Player*> Game::get_players()const{

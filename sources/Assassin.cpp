@@ -20,16 +20,16 @@ namespace coup{
         if(this->game->turn() != this->name){
             throw runtime_error("it is not player turn");
         }
-        
         if(this->salary >= bound){
             this->game->setturn();
             this->salary = this->salary-bound;
             pl.alive = false;
             this->game->last_player_coup = pl.name;
             this->game->removeplayer(pl);
-            const bool seven = false;
+            bool seven = false;
             this->last_action = "coup";
             this->game->last_coup = &pl;
+            this->game->regular_coup = true;
             this->game->start_game = true;
         }
         else if(this->salary >= bound1 && seven){
@@ -38,6 +38,7 @@ namespace coup{
             pl.alive = false;
             this->game->last_player_coup = pl.name;
             this->game->last_coup = &pl;
+            this->game->regular_coup = false;
             this->game->removeplayer(pl);
             this->last_action = "coup";
             this->game->start_game = true;

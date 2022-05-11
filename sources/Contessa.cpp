@@ -20,8 +20,8 @@ namespace coup{
         if(pl.last_action != "coup"){
             throw runtime_error("coup wasn't last action...");
         }
-        if(this->game->end_turn){
-            throw runtime_error("too late to block the action...");
+        if(this->game->regular_coup){
+            throw runtime_error("can't block after regular assassin");
         }
         this->game->last_coup->alive = true;
         this->game->addname(this->game->last_player_coup);
